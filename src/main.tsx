@@ -5,6 +5,7 @@ import Canvas from './Canvas.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <h2>Fabric.js canvas using Prime template POC</h2>
     <Canvas />
   </React.StrictMode>,
 )
