@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "fabric": "^6.0.2",
+    "fast-xml-parser": "^4.4.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "xml2js": "^0.6.2"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
