@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import FileReaderComponent from './FileReaderComponent';
 import { XMLParser } from 'fast-xml-parser';
-import { Scene } from './PrimeSceneStructure';
+import { Scene } from './types/PrimeSceneStructure';
 import './css/CanvasToolbar.css';
 
 const parserOptions = {
