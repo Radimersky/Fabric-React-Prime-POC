@@ -1,5 +1,6 @@
 import { Canvas, Textbox } from 'fabric';
 import { useState } from 'react';
+import './css/CanvasToolbar.css';
 
 const CanvasTextBoxCreator: React.FC<CanvasTextBoxCreatorProps> = ({
   canvas,
@@ -7,7 +8,7 @@ const CanvasTextBoxCreator: React.FC<CanvasTextBoxCreatorProps> = ({
   textPositionY,
   fontSize,
 }) => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('AXIS');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -34,9 +35,9 @@ const CanvasTextBoxCreator: React.FC<CanvasTextBoxCreatorProps> = ({
   };
 
   return (
-    <div>
+    <div className="tool-container tool-column">
       <input type="text" value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleButtonClick}>Create Text Box</button>
+      <button onClick={handleButtonClick}>Add Text</button>
     </div>
   );
 };

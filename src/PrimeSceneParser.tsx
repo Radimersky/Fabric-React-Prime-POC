@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FileReaderComponent from './FileReaderComponent';
 import { XMLParser } from 'fast-xml-parser';
 import { Scene } from './PrimeSceneStructure';
+import './css/CanvasToolbar.css';
 
 const parserOptions = {
   ignoreAttributes: false,
@@ -30,7 +31,7 @@ const PrimeSceneParser: React.FC<PrimeSceneParserProps> = ({
   };
 
   return (
-    <div>
+    <div className="tool-container">
       <span>Select Prime Scene:</span>
       <FileReaderComponent onFileRead={handleFileContent} />
     </div>

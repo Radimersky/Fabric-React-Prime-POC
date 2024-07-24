@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import Canvas from './Canvas.tsx'
-import { FabricContextProvider } from './FabricContextProvider.tsx'
-import CanvasToolbar from './CanvasToolbar.tsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import Canvas from './Canvas.tsx';
+import { FabricContextProvider } from './FabricContextProvider.tsx';
+import CanvasToolbar from './CanvasToolbar.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -15,4 +15,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </>
     </FabricContextProvider>
   </React.StrictMode>,
-)
+);

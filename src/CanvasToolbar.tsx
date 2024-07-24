@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import CanvasOperation from './CanvasTextBoxCreator';
 import { FabricContext } from './FabricContextProvider';
+import PrimeSceneParser from './PrimeSceneParser.tsx';
 
 const CanvasToolbar: React.FC = () => {
   const [canvas] = useContext(FabricContext);
@@ -10,12 +11,19 @@ const CanvasToolbar: React.FC = () => {
   }
 
   return (
-    <CanvasOperation
-      canvas={canvas}
-      fontSize={30}
-      textPositionX={100}
-      textPositionY={100}
-    />
+    <div className="flex">
+      <CanvasOperation
+        canvas={canvas}
+        fontSize={30}
+        textPositionX={100}
+        textPositionY={100}
+      />
+      <PrimeSceneParser
+        onSceneParsed={scene => {
+          console.log(scene);
+        }}
+      />
+    </div>
   );
 };
 
