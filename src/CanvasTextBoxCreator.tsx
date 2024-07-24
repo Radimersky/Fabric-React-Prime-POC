@@ -1,6 +1,5 @@
 import { Canvas, Textbox } from 'fabric';
 import { useState } from 'react';
-import './css/CanvasToolbar.css';
 
 const CanvasTextBoxCreator: React.FC<CanvasTextBoxCreatorProps> = ({
   canvas,

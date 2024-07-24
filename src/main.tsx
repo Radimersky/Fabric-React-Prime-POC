@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/index.css';
+import './css/CanvasToolbar.css';
 import Canvas from './Canvas.tsx';
 import { FabricContextProvider } from './FabricContextProvider.tsx';
 import CanvasToolbar from './CanvasToolbar.tsx';
