@@ -2,31 +2,57 @@ import { useContext, useEffect } from 'react';
 import * as fabric from 'fabric';
 import { FabricContext } from './FabricContextProvider';
 import { MAX_CANVAS_SIZE } from './Constants';
+import { calculateCanvasScalingFactor } from './MathUtils';
+import { Size } from './types/Size';
 
 const canvasId = 'canvas';
 
 const Canvas: React.FC = () => {
-  const [, , initCanvas] = useContext(FabricContext);
+  const [, sceneSize, , initCanvas, , setScalingFactor] =
+    useContext(FabricContext);
 
   useEffect(() => {
-    const canvas = createCanvas();
+    const scalingFactor = sceneSize
+      ? calculateCanvasScalingFactor(sceneSize)
+      : 1;
+
+    const scaledSize: Size = sceneSize
+      ? {
+          Width: sceneSize.Width * scalingFactor,
+          Height: sceneSize.Height * scalingFactor,
+        }
+      : MAX_CANVAS_SIZE;
+
+    const canvas = createCanvas(scaledSize.Width, scaledSize.Height);
+    // Apply transformation matrix to flip the Y-axis, because Prime uses top bottom corner as x:0 y:0 coordinate
+    canvas.viewportTransform = [1, 0, 0, -1, 0, canvas.getHeight()];
+
+    canvas.on('object:added', e => {
+      const obj = e.target;
+      if (obj) {
+        obj.set({
+          flipY: true, // Flips object on Y axis because they are upside down due to viewport transformation above
+        });
+        obj.setCoords();
+      }
+    });
+
     canvas.requestRenderAll();
 
-    initCanvas(canvas, MAX_CANVAS_SIZE);
+    initCanvas(canvas);
+    setScalingFactor(scalingFactor);
 
     return () => {
       canvas.dispose().catch(e => console.log(e));
     };
-  }, [initCanvas]);
+  }, [initCanvas, sceneSize, setScalingFactor]);
 
-  const createCanvas = () => {
-    const options = {
-      height: MAX_CANVAS_SIZE.Height,
-      width: MAX_CANVAS_SIZE.Width,
-      backgroundColor: 'white',
-    };
-
-    return new fabric.Canvas(canvasId, options);
+  const createCanvas = (width: number, height: number) => {
+    return new fabric.Canvas(canvasId, {
+      height: height,
+      width: width,
+      backgroundColor: '#FFFFFF20',
+    });
   };
 
   return <canvas id={canvasId} />;

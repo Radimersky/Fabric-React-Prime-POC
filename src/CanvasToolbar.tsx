@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import CanvasOperation from './CanvasTextBoxCreator';
 import { FabricContext } from './FabricContextProvider';
-import PrimeSceneParser from './PrimeSceneParser.tsx';
+import CanvasSceneControll from './CanvasSceneControll.tsx';
 
 const CanvasToolbar: React.FC = () => {
   const [canvas] = useContext(FabricContext);
@@ -18,11 +18,7 @@ const CanvasToolbar: React.FC = () => {
         textPositionX={100}
         textPositionY={100}
       />
-      <PrimeSceneParser
-        onSceneParsed={scene => {
-          console.log(scene);
-        }}
-      />
+      <CanvasSceneControll />
     </div>
   );
 };
