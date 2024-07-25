@@ -31,6 +31,81 @@ export interface Scene {
   InvokeEvents: boolean;
 }
 
+export interface Text {
+  Name: string;
+  Opacity: number;
+  RotationOrder: string;
+  ProjectionCenter: Point;
+  BlendingMode: string;
+  PreviewOnly: string;
+  Position: Point3D;
+  Scale: Scale;
+  Rotation: Point3D;
+  Pivot: Point3D;
+  Origin: Point;
+  Size: Size;
+  LockSizeAspect: boolean;
+  Mode: string;
+  HorizontalAlignment: string;
+  VerticalAlignment: string;
+  WordWrap: string;
+  HorizontalScale: string;
+  VerticalScale: string;
+  Direction: string;
+  Color: string;
+  Font: Font;
+  _2d: _2d;
+  Style: string | null;
+  UpdateTextSize: boolean;
+  Text: string;
+  Number: number;
+  Format: number;
+}
+
+export interface Image {
+  Name: string;
+  Opacity: number;
+  RotationOrder: string;
+  ProjectionCenter: Point;
+  BlendingMode: string;
+  PreviewOnly: string;
+  Position: Point3D;
+  Scale: Scale;
+  Rotation: Point3D;
+  Pivot: Point3D;
+  Origin: Point;
+  Size: Size;
+  LockSizeAspect: boolean;
+  File: string | null;
+  SizeMode: string;
+  FileSize: Size;
+  SuppressSizeMode: boolean;
+  HideOnClear: boolean;
+  TextureQuality: string;
+  TextureWrap: string;
+  ColorMode: string;
+  Color: string;
+  LinearStartColor: string;
+  LinearFinishColor: string;
+  Animations: Animations;
+}
+
+interface Font {
+  Name: string;
+  Size: number;
+  Weight: string;
+  Style: string;
+  Stretch: string;
+  TypefaceName: string;
+  Color: string;
+  Kerning: number;
+  Leading: number;
+  SpaceWidth: number;
+  FixedPitch: number;
+  LineSpacing: number;
+  Vertical: boolean;
+}
+
 interface Actions {
   Action: Action[];
 }
@@ -93,34 +168,6 @@ interface Graphics {
   Text: Text;
 }
 
-interface Image {
-  Name: string;
-  Opacity: number;
-  RotationOrder: string;
-  ProjectionCenter: Point;
-  BlendingMode: string;
-  PreviewOnly: string;
-  Position: Point3D;
-  Scale: Scale;
-  Rotation: Point3D;
-  Pivot: Point3D;
-  Origin: Point;
-  Size: Size;
-  LockSizeAspect: boolean;
-  File: string | null;
-  SizeMode: string;
-  FileSize: Size;
-  SuppressSizeMode: boolean;
-  HideOnClear: boolean;
-  TextureQuality: string;
-  TextureWrap: string;
-  ColorMode: string;
-  Color: string;
-  LinearStartColor: string;
-  LinearFinishColor: string;
-  Animations: Animations;
-}
-
 interface Animations {
   Animation: Animation[];
 }
@@ -132,53 +179,6 @@ interface Animation {
 
 interface Keyframe {
   Frame: string;
-}
-
-interface Text {
-  Name: string;
-  Opacity: number;
-  RotationOrder: string;
-  ProjectionCenter: Point;
-  BlendingMode: string;
-  PreviewOnly: string;
-  Position: Point3D;
-  Scale: Scale;
-  Rotation: Point3D;
-  Pivot: Point3D;
-  Origin: Point;
-  Size: Size;
-  LockSizeAspect: boolean;
-  Mode: string;
-  HorizontalAlignment: string;
-  VerticalAlignment: string;
-  WordWrap: string;
-  HorizontalScale: string;
-  VerticalScale: string;
-  Direction: string;
-  Color: string;
-  Font: Font;
-  _2d: _2d;
-  Style: string | null;
-  UpdateTextSize: boolean;
-  Text: string;
-  Number: number;
-  Format: number;
-}
-
-interface Font {
-  Name: string;
-  Size: number;
-  Weight: string;
-  Style: string;
-  Stretch: string;
-  TypefaceName: string;
-  Color: string;
-  Kerning: number;
-  Leading: number;
-  SpaceWidth: number;
-  FixedPitch: number;
-  LineSpacing: number;
-  Vertical: boolean;
 }
 
 interface _2d {
