@@ -1,5 +1,5 @@
-import { Point, Point3D } from "./Point";
-import { Size } from "./Size";
+import { Point, Point3D } from './Point';
+import { Size } from './Size';
 
 export interface Scene {
   Version: string;
@@ -164,8 +164,8 @@ interface Replaceables {
 }
 
 interface Graphics {
-  Image: Image;
-  Text: Text;
+  Image: Image[];
+  Text: Text[];
 }
 
 interface Animations {
