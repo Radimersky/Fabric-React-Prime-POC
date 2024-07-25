@@ -1,26 +1,23 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import * as fabric from 'fabric';
 import { FabricContext } from './FabricContextProvider';
 import { MAX_CANVAS_SIZE } from './Constants';
 
+const canvasId = 'canvas';
+
 const Canvas: React.FC = () => {
   const [, , initCanvas] = useContext(FabricContext);
-
-  // Ensure initCanvas ref won't change between rerenders to make it safe to use inside useEffect below
-  const stableInitCanvas = useCallback(initCanvas, [initCanvas]);
 
   useEffect(() => {
     const canvas = createCanvas();
     canvas.requestRenderAll();
 
-    stableInitCanvas(canvas, MAX_CANVAS_SIZE);
+    initCanvas(canvas, MAX_CANVAS_SIZE);
 
     return () => {
       canvas.dispose().catch(e => console.log(e));
     };
-  }, [stableInitCanvas]);
-
-  const canvasId = 'canvas';
+  }, [initCanvas]);
 
   const createCanvas = () => {
     const options = {
