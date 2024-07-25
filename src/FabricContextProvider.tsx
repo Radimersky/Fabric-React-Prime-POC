@@ -1,12 +1,12 @@
 import { createContext, useCallback, useState } from 'react';
 import { Canvas } from 'fabric';
-import { Dimensions } from './types/Dimension';
+import { Size } from './types/Size';
 import { MAX_CANVAS_SIZE } from './Constants';
 
 type FabricContext = [
   Canvas | null,
-  Dimensions,
-  (canvas: Canvas, maxCanvasSize: Dimensions) => void,
+  Size,
+  (canvas: Canvas, maxCanvasSize: Size) => void,
 ];
 
 export const FabricContext = createContext<FabricContext>([
@@ -19,15 +19,12 @@ export const FabricContextProvider = (props: {
   children: JSX.Element;
 }): JSX.Element => {
   const [canvas, setCanvas] = useState<Canvas | null>(null);
-  const [maxSize, setMaxSize] = useState<Dimensions>(MAX_CANVAS_SIZE);
+  const [maxSize, setMaxSize] = useState<Size>(MAX_CANVAS_SIZE);
 
-  const initCanvas = useCallback(
-    (newCanvas: Canvas, maxSize: Dimensions): void => {
-      setCanvas(newCanvas);
-      setMaxSize(maxSize);
-    },
-    [],
-  );
+  const initCanvas = useCallback((newCanvas: Canvas, maxSize: Size): void => {
+    setCanvas(newCanvas);
+    setMaxSize(maxSize);
+  }, []);
 
   return (
     <FabricContext.Provider value={[canvas, maxSize, initCanvas]}>

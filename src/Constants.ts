@@ -1,3 +1,3 @@
-import { Dimensions } from './types/Dimension';
+import { Size } from './types/Size';
 
-export const MAX_CANVAS_SIZE: Dimensions = { width: 900, height: 600 };
+export const MAX_CANVAS_SIZE: Size = { width: 900, height: 600 };
