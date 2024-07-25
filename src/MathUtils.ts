@@ -4,8 +4,8 @@ export const calculateCanvasScalingFactor = (
   original: Size,
   max: Size,
 ): number => {
-  const widthScalingFactor = max.width / original.width;
-  const heightScalingFactor = max.height / original.height;
+  const widthScalingFactor = max.Width / original.Width;
+  const heightScalingFactor = max.Height / original.Height;
 
   const scalingFactor = Math.min(widthScalingFactor, heightScalingFactor);
 

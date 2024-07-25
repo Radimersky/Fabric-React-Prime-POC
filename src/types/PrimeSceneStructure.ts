@@ -1,4 +1,5 @@
 import { Point, Point3D } from "./Point";
+import { Size } from "./Size";
 
 export interface Scene {
   Version: string;
@@ -68,11 +69,6 @@ interface Resolution {
   Size: Size;
   FrameRate: string;
   PixelAspect: number;
-}
-
-interface Size {
-  Width: number;
-  Height: number;
 }
 
 interface RegionOfInterest {

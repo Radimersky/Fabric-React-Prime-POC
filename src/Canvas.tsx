@@ -21,8 +21,8 @@ const Canvas: React.FC = () => {
 
   const createCanvas = () => {
     const options = {
-      height: MAX_CANVAS_SIZE.height,
-      width: MAX_CANVAS_SIZE.width,
+      height: MAX_CANVAS_SIZE.Height,
+      width: MAX_CANVAS_SIZE.Width,
       backgroundColor: 'white',
     };
 
