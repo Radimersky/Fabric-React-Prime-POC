@@ -1,3 +1,5 @@
+import { Point, Point3D } from "./Point";
+
 export interface Scene {
   Version: string;
   Revision: string;
@@ -56,17 +58,6 @@ interface Canvas {
   UseFirstCamera: boolean;
   Layer: number;
   Graphics: Graphics;
-}
-
-interface Point {
-  X: number;
-  Y: number;
-}
-
-interface Point3D {
-  X: number;
-  Y: number;
-  Z: number;
 }
 
 interface Scale extends Point3D {
