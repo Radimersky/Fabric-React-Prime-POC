@@ -4,6 +4,7 @@ import { Scene } from './types/Scene';
 import { FabricContext } from './FabricContextProvider';
 import { Size } from './types/Size';
 import CanvasTextBox from './CanvasTextBox';
+import CanvasImage from './CanvasImage';
 
 const CanvasSceneControll: React.FC = () => {
   const [canvas, , scalingFactor, , setSceneSize] = useContext(FabricContext);
@@ -40,6 +41,23 @@ const CanvasSceneControll: React.FC = () => {
     [scene, canvas, scalingFactor],
   );
 
+  const imageComponents = useMemo(
+    () =>
+      canvas
+        ? scene?.Canvas.Graphics.Image.slice()
+            .reverse()
+            .map((imageOptions, index) => (
+              <CanvasImage
+                canvas={canvas}
+                options={imageOptions}
+                scalingFactor={scalingFactor}
+                key={index}
+              />
+            ))
+        : null,
+    [scene, canvas, scalingFactor],
+  );
+
   return (
     <>
       <div className="tool-container">
@@ -47,6 +65,9 @@ const CanvasSceneControll: React.FC = () => {
       </div>
       {textBoxComponents && (
         <div className="tool-container tool-column">{textBoxComponents}</div>
+      )}
+      {textBoxComponents && (
+        <div className="tool-container tool-column">{imageComponents}</div>
       )}
     </>
   );

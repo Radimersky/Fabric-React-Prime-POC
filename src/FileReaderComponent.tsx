@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { ReadMode } from './types/ReadMode';
 
-const FileReaderComponent: React.FC<FileReaderProps> = ({ onFileRead }) => {
+const FileReaderComponent: React.FC<FileReaderProps> = ({
+  onFileRead,
+  readMode,
+}) => {
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +22,11 @@ const FileReaderComponent: React.FC<FileReaderProps> = ({ onFileRead }) => {
 
       reader.onerror = e => handleError(e);
 
-      reader.readAsText(file);
+      if (readMode === ReadMode.File) {
+        reader.readAsText(file);
+      } else {
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -37,6 +45,7 @@ const FileReaderComponent: React.FC<FileReaderProps> = ({ onFileRead }) => {
 
 type FileReaderProps = {
   onFileRead: (fileContent: string | ArrayBuffer) => void;
+  readMode: ReadMode;
 };
 
 export default FileReaderComponent;

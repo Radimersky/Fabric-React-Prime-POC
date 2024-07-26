@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FileReaderComponent from './FileReaderComponent';
 import { XMLParser } from 'fast-xml-parser';
 import { Scene } from './types/Scene';
+import { ReadMode } from './types/ReadMode';
 
 const parserOptions = {
   ignoreAttributes: false,
@@ -32,7 +33,10 @@ const PrimeSceneParser: React.FC<PrimeSceneParserProps> = ({
   return (
     <div className="tool-container">
       <span>Select Prime Scene:</span>
-      <FileReaderComponent onFileRead={handleFileContent} />
+      <FileReaderComponent
+        onFileRead={handleFileContent}
+        readMode={ReadMode.File}
+      />
     </div>
   );
 };
