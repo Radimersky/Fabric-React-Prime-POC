@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import * as fabric from 'fabric';
 import { FabricContext } from './FabricContextProvider';
-import { MAX_CANVAS_SIZE } from './Constants';
+import { CANVAS_BACKGROUND, MAX_CANVAS_SIZE } from './Constants';
 import { calculateCanvasScalingFactor } from './MathUtils';
 import { Size } from './types/Size';
 
@@ -51,7 +51,7 @@ const Canvas: React.FC = () => {
     return new fabric.Canvas(canvasId, {
       height: height,
       width: width,
-      backgroundColor: '#FFFFFF20',
+      backgroundColor: CANVAS_BACKGROUND,
     });
   };
 
