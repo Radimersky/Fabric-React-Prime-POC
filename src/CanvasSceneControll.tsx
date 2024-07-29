@@ -24,39 +24,33 @@ const CanvasSceneControll: React.FC = () => {
     [setSceneSize],
   );
 
-  const textBoxComponents = useMemo(
-    () =>
-      canvas
-        ? scene?.Canvas.Graphics.Text.slice()
-            .reverse()
-            .map((text, index) => (
-              <CanvasTextBox
-                canvas={canvas}
-                options={text}
-                scalingFactor={scalingFactor}
-                key={index}
-              />
-            ))
-        : null,
-    [scene, canvas, scalingFactor],
-  );
+  const textBoxComponents = useMemo(() => {
+    const sceneTexts = scene?.Canvas.Graphics.Text;
+    return canvas && sceneTexts
+      ? reverseIfArray(sceneTexts).map((textOptions, index) => (
+          <CanvasTextBox
+            canvas={canvas}
+            options={textOptions}
+            scalingFactor={scalingFactor}
+            key={index}
+          />
+        ))
+      : null;
+  }, [scene, canvas, scalingFactor]);
 
-  const imageComponents = useMemo(
-    () =>
-      canvas
-        ? scene?.Canvas.Graphics.Image.slice()
-            .reverse()
-            .map((imageOptions, index) => (
-              <CanvasImage
-                canvas={canvas}
-                options={imageOptions}
-                scalingFactor={scalingFactor}
-                key={index}
-              />
-            ))
-        : null,
-    [scene, canvas, scalingFactor],
-  );
+  const imageComponents = useMemo(() => {
+    const sceneImage = scene?.Canvas.Graphics.Image;
+    return canvas && sceneImage
+      ? reverseIfArray(sceneImage).map((imageOptions, index) => (
+          <CanvasImage
+            canvas={canvas}
+            options={imageOptions}
+            scalingFactor={scalingFactor}
+            key={index}
+          />
+        ))
+      : null;
+  }, [scene, canvas, scalingFactor]);
 
   return (
     <>
@@ -66,11 +60,18 @@ const CanvasSceneControll: React.FC = () => {
       {textBoxComponents && (
         <div className="tool-container tool-column">{textBoxComponents}</div>
       )}
-      {textBoxComponents && (
+      {imageComponents && (
         <div className="tool-container tool-column">{imageComponents}</div>
       )}
     </>
   );
+};
+
+const reverseIfArray = <T,>(data: T | T[]): T[] => {
+  if (Array.isArray(data)) {
+    return data.slice().reverse();
+  }
+  return [data];
 };
 
 export default CanvasSceneControll;

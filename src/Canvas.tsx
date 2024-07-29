@@ -18,7 +18,7 @@ const createCanvas = (width: number, height: number) => {
 const applyGlobalObjectTransformation = (canvas: fabric.Canvas) => {
   canvas.on('object:added', e => {
     const obj = e.target;
-    
+
     if (!obj) {
       return;
     }
@@ -48,9 +48,7 @@ const Canvas: React.FC = () => {
       : MAX_CANVAS_SIZE;
 
     const canvas = createCanvas(scaledSize.Width, scaledSize.Height);
-
     applyGlobalObjectTransformation(canvas);
-
     canvas.requestRenderAll();
 
     initCanvas(canvas);

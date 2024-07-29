@@ -164,8 +164,8 @@ interface Replaceables {
 }
 
 interface Graphics {
-  Image: Image[];
-  Text: Text[];
+  Image: Image[] | undefined;
+  Text: Text[] | undefined;
 }
 
 interface Animations {
