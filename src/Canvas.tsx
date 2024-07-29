@@ -18,17 +18,13 @@ const createCanvas = (width: number, height: number) => {
 const applyGlobalObjectTransformation = (canvas: fabric.Canvas) => {
   canvas.on('object:added', e => {
     const obj = e.target;
+    
     if (!obj) {
       return;
     }
 
-    const flippedYCoordinate = canvas.getHeight() - obj.top;
-
     obj.set({
-      top:
-        obj.type === 'image'
-          ? flippedYCoordinate
-          : flippedYCoordinate - (obj.height || 0),
+      top: canvas.getHeight() - obj.top,
     });
 
     obj.setCoords();

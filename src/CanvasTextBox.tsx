@@ -12,13 +12,16 @@ const CanvasTextBox: React.FC<CanvasTextBoxProps> = ({
 
   useEffect(() => {
     const fontOptions = options.Font;
+    const horizontalAlignment = convertHorizontalAlignment(options.HorizontalAlignment);
     const textbox = new Textbox(options.Text, {
       left: options.Position.X * scalingFactor,
       top: options.Position.Y * scalingFactor,
-      textAlign: options.HorizontalAlignment.toLowerCase(),
+      width: options.Size.Width * scalingFactor,
+      height: options.Size.Height * scalingFactor,
+      textAlign: horizontalAlignment,
+      originY: convertVerticalAlignment(options.VerticalAlignment),
+      originX: horizontalAlignment,
       angle: options.Rotation.Z,
-      width: options.Size.Width,
-      height: options.Size.Height,
       selectable: false,
       opacity: options.Opacity / 100,
       fontFamily: fontOptions.Name || 'Arial',
@@ -26,6 +29,7 @@ const CanvasTextBox: React.FC<CanvasTextBoxProps> = ({
       fontWeight: fontOptions.Weight,
       fontStyle: fontOptions.Style,
       fill: '#' + fontOptions.Color,
+      padding: 0,
     });
 
     canvas.add(textbox);
@@ -52,6 +56,36 @@ const CanvasTextBox: React.FC<CanvasTextBoxProps> = ({
     </div>
   );
 };
+
+const convertVerticalAlignment = (alignment: string) => {
+  switch (alignment) {
+    case 'Top':
+    case 'First':
+      return 'top';
+    case 'Middle':
+      return 'center';
+    case 'Last':
+    case 'Bottom':
+      return 'bottom';
+    default:
+      throw Error("Verical alignment does not exists: " + alignment)
+  }
+}
+
+const convertHorizontalAlignment = (alignment: string) => {
+  switch (alignment) {
+    case 'Left':
+    case 'First':
+      return 'left';
+    case 'Center':
+      return 'center';
+    case 'Last':
+    case 'Right':
+      return 'right';
+    default:
+      throw Error("Verical alignment does not exists: " + alignment)
+  }
+}
 
 type CanvasTextBoxProps = {
   canvas: Canvas;
