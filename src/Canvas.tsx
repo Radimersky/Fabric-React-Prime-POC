@@ -7,6 +7,34 @@ import { Size } from './types/Size';
 
 const canvasId = 'canvas';
 
+const createCanvas = (width: number, height: number) => {
+  return new fabric.Canvas(canvasId, {
+    height: height,
+    width: width,
+    backgroundColor: CANVAS_BACKGROUND,
+  });
+};
+
+const applyGlobalObjectTransformation = (canvas: fabric.Canvas) => {
+  canvas.on('object:added', e => {
+    const obj = e.target;
+    if (!obj) {
+      return;
+    }
+
+    const flippedYCoordinate = canvas.getHeight() - obj.top;
+
+    obj.set({
+      top:
+        obj.type === 'image'
+          ? flippedYCoordinate
+          : flippedYCoordinate - (obj.height || 0),
+    });
+
+    obj.setCoords();
+  });
+};
+
 const Canvas: React.FC = () => {
   const [, sceneSize, , initCanvas, , setScalingFactor] =
     useContext(FabricContext);
@@ -24,18 +52,8 @@ const Canvas: React.FC = () => {
       : MAX_CANVAS_SIZE;
 
     const canvas = createCanvas(scaledSize.Width, scaledSize.Height);
-    // Apply transformation matrix to flip the Y-axis, because Prime uses top bottom corner as x:0 y:0 coordinate
-    canvas.viewportTransform = [1, 0, 0, -1, 0, canvas.getHeight()];
 
-    canvas.on('object:added', e => {
-      const obj = e.target;
-      if (obj) {
-        obj.set({
-          flipY: true, // Flips object on Y axis because they are upside down due to viewport transformation above
-        });
-        obj.setCoords();
-      }
-    });
+    applyGlobalObjectTransformation(canvas);
 
     canvas.requestRenderAll();
 
@@ -46,14 +64,6 @@ const Canvas: React.FC = () => {
       canvas.dispose().catch(e => console.log(e));
     };
   }, [initCanvas, sceneSize, setScalingFactor]);
-
-  const createCanvas = (width: number, height: number) => {
-    return new fabric.Canvas(canvasId, {
-      height: height,
-      width: width,
-      backgroundColor: CANVAS_BACKGROUND,
-    });
-  };
 
   return <canvas id={canvasId} />;
 };
